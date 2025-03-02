@@ -1,9 +1,9 @@
 package protocol
 
 import (
-	"auth/conf"
-	"auth/logger"
-	"auth/swagger"
+	"cmdb/conf"
+	"cmdb/logger"
+	"cmdb/swagger"
 	"context"
 	"fmt"
 	"net/http"

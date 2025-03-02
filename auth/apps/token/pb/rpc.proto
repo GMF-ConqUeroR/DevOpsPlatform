@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package devops_platform.token;
+option go_package="auth/apps/token";
+
+import "auth/apps/token/pb/model.proto";
+
+service RPC {
+    // 令牌颁发
+    rpc IssueToken(IssueTokenRequest) returns(Token);
+    // 校验令牌, 给其他服务确认用户身份使用
+    rpc ValidateToken(ValidateTokenRequest) returns(Token);
+    // 获取Token, 内部Debug使用
+    rpc DesribeToken(DescribeTokenRequest) returns(Token);
+}
+

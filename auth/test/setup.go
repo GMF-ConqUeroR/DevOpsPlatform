@@ -3,6 +3,8 @@ package test
 import (
 	"auth/conf"
 
+	_ "auth/apps"
+
 	"github.com/infraboard/mcube/ioc"
 	"github.com/infraboard/mcube/validator"
 )

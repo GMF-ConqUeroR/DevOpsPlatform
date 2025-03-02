@@ -1,8 +1,8 @@
 package protocol
 
 import (
-	"auth/conf"
-	"auth/logger"
+	"cmdb/conf"
+	"cmdb/logger"
 	"context"
 	"net"
 

@@ -1,6 +1,6 @@
-PROJECT_NAME := "auth"
+PROJECT_NAME := "cmdb"
 MAIN_FILE_PAHT := "main.go"
-PKG := "auth"
+PKG := "cmdb"
 
 IMAGE_PREFIX := "github.com/infraboard/mcenter"
 

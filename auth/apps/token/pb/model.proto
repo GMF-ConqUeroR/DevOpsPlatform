@@ -1,0 +1,49 @@
+syntax = "proto3";
+
+package devops_platform.token;
+option go_package="auth/apps/token";
+
+message Token {
+    // 访问令牌
+    // @gotags: json:"access_token" bson:"access_token"
+    string access_token = 1;
+    // 刷新Token
+    // @gotags: json:"refresh_token" bson:"refresh_token"
+    string refresh_token = 2;
+    // 令牌颁发时间
+    // @gotags: json:"issue_at" bson:"issue_at"
+    int64 issue_at = 3;
+    // 多少秒后过期
+    // @gotags: json:"access_token_expired_second" bson:"access_token_expired_second"
+    int64 access_token_expired_second = 4;
+    // 多少秒后过期
+    // @gotags: json:"refresh_token_expired_second" bson:"refresh_token_expired_second"
+    int64 refresh_token_expired_second = 6;
+    // 颁发的用户
+    // @gotags: json:"username" bson:"username"
+    string username = 5;
+}
+
+message IssueTokenRequest {
+    // 用户名称
+    string username = 1;
+    // 密码
+    string password = 2;
+}
+
+message RevolkTokenRequest {
+    // 需要被撤销的Token
+    string access_token = 1;
+    // 使用Refresh Token做撤销验证
+    string refresh_token = 2;
+}
+
+message ValidateTokenRequest {
+    // 需要验证的Token
+    string access_token = 1;
+}
+
+message DescribeTokenRequest {
+    // 需要查看的Token
+    string access_token = 1;
+}

@@ -250,7 +250,7 @@ type App struct {
 
 func NewDefaultApp() *App {
 	return &App{
-		Name: "auth",
+		Name: "cmdb",
 	}
 }
 

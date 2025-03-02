@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package devops_platform.user;
+option go_package="auth/apps/user";
+
+import "auth/apps/user/pb/model.proto";
+
+service RPC {
+    rpc CreateUser(CreateUserRequest) returns(User);
+    rpc DescribeUser(DescribeUserRequest) returns(User);
+}

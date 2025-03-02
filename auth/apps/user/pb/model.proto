@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package devops_platform.user;
+option go_package="auth/apps/user";
+
+import "mcube/pb/resource/meta.proto";
+
+message CreateUserRequest {
+    // @gotags: json:"username" bson:"username" validate:"required"
+    string username =1;
+    // @gotags: json:"password" bson:"password" validate:"required"
+    string password =2;
+}
+
+message User {
+    // @gotags: json:"meta" bson:",inline"
+    infraboard.mcube.resource.Meta meta = 1;
+    // @gotags: json:"spec" bson:",inline"
+    CreateUserRequest spec = 2;
+}
+
+message DescribeUserRequest {
+    string name = 1;
+}

@@ -1,9 +1,9 @@
 package start
 
 import (
-	"auth/conf"
-	"auth/logger"
-	"auth/protocol"
+	"cmdb/conf"
+	"cmdb/logger"
+	"cmdb/protocol"
 	"context"
 	"os"
 	"os/signal"
@@ -12,7 +12,7 @@ import (
 	"github.com/infraboard/mcube/ioc"
 	"github.com/spf13/cobra"
 
-	_ "auth/apps"
+	_ "cmdb/apps"
 )
 
 var (
@@ -22,9 +22,9 @@ var (
 
 var CMD = &cobra.Command{
 	Use:   "start",
-	Short: "auth Center",
+	Short: "cmdb Center",
 	Long: `
-		用户认证授权模块。
+		用户资产管理模块。
 	`,
 	Run: func(cmd *cobra.Command, args []string) {
 		// 加载全局配置
