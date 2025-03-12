@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package devops_platform.role;
+option go_package="auth/apps/role";
+
+import "auth/apps/role/pb/model.proto";
+
+
+service RPC {
+    // 创建角色
+    rpc CreateRole(RoleSpec) returns(Role);
+    // 查询角色列表
+    rpc QueryRole(QueryRoleRequest) returns(RoleSet);
+}

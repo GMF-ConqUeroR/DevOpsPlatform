@@ -77,11 +77,10 @@ pb: ## Copy mcube protobuf files to common/pb
 	@sudo rm -rf common/pb/github.com/infraboard/mcube/pb/*/*.go
 
 gen: ## Generate Code
-	@protoc -I=.. -I=../.. --go_out=. --go_opt=module=${PKG} --go-grpc_out=. --go-grpc_opt=module=${PKG} ../mcenter/apps/*/pb/*.proto
+	@protoc -I=.. -I=../.. --go_out=. --go_opt=module=${PKG} --go-grpc_out=. --go-grpc_opt=module=${PKG} ../auth/apps/*/pb/*.proto
 	@go fmt ./...
 
 	@protoc-go-inject-tag -input=apps/*/*.pb.go
-	@mcube generate enum -p -m apps/*/*.pb.go
 
 
 help: ## Display this help screen

@@ -3,8 +3,8 @@ package api
 import (
 	"auth/apps/token"
 
-	"github.com/emicklei/go-restful/v3"
 	restfulspec "github.com/emicklei/go-restful-openapi/v2"
+	"github.com/emicklei/go-restful/v3"
 	"github.com/infraboard/mcube/ioc"
 )
 
@@ -33,9 +33,6 @@ func (h *Handler) Registry(r *restful.WebService) {
 		Writes(token.Token{}).
 		Returns(200, "OK", token.Token{}))
 
-	r.Route(r.GET("/").To(func(r1 *restful.Request, r2 *restful.Response) {
-		r2.WriteJson("hello", restful.MIME_JSON)
-	}))
 }
 
 func init() {

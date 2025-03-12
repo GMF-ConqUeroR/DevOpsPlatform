@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package devops_platform.endpoint;
+option go_package="auth/apps/endpoint";
+
+import "mcube/pb/resource/meta.proto";
+
+message EndpointSpec {
+    // 服务名称
+    // @gotags: json:"service" bson:"service"
+    string service = 1;
+    // 功能名称
+    // @gotags: json:"action" bson:"action"
+    string action = 2;
+    // 功能描述
+    // @gotags: json:"descrption" bson:"descrption"
+    string descrption = 3;
+}
+
+message EndpointSpecSet {
+    // 服务功能列表
+    // @gotags: json:"items" bson:"items"
+    repeated EndpointSpec items = 1;
+}
+
+message Endpoint {
+    // 元数据信息
+    // @gotags: json:"meta" bson:",inline"
+    infraboard.mcube.resource.Meta meta = 1;
+    // Endpint定义
+    // @gotags: json:"spec" bson:",inline"
+    EndpointSpec spec = 2;
+}
+
+message EndpointSet {
+    // 服务功能列表
+    // @gotags: json:"items" bson:"items"
+    repeated Endpoint items = 1;
+}

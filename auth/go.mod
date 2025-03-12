@@ -8,15 +8,15 @@ require (
 	github.com/BurntSushi/toml v1.4.0
 	github.com/caarlos0/env v3.5.0+incompatible
 	github.com/caarlos0/env/v6 v6.10.1
-	github.com/emicklei/go-restful-openapi/v2 v2.9.1
-	github.com/emicklei/go-restful/v3 v3.12.1
+	github.com/emicklei/go-restful-openapi/v2 v2.11.0
+	github.com/emicklei/go-restful/v3 v3.12.2
 	github.com/go-openapi/spec v0.21.0
 	github.com/infraboard/mcube v1.19.22
 	github.com/rs/xid v1.6.0
 	github.com/rs/zerolog v1.33.0
 	github.com/spf13/cobra v1.9.1
-	go.mongodb.org/mongo-driver v1.17.2
-	golang.org/x/crypto v0.34.0
+	go.mongodb.org/mongo-driver v1.17.3
+	golang.org/x/crypto v0.35.0
 	google.golang.org/grpc v1.70.0
 	google.golang.org/protobuf v1.36.5
 	gorm.io/driver/mysql v1.5.7

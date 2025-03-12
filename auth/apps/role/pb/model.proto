@@ -1,0 +1,50 @@
+syntax = "proto3";
+
+package devops_platform.role;
+option go_package="auth/apps/role";
+
+import "mcube/pb/resource/meta.proto";
+
+// cmdb sercret list
+message Permission {
+    // 服务
+    // @gotags: json:"service" bson:"service" validate:"required"
+    string service = 1;
+    // 资源
+    // @gotags: json:"resource" bson:"resource" validate:"required"
+    string resource = 2;
+    // 操作
+    // @gotags: json:"action" bson:"action" validate:"required"
+    repeated string action = 3;
+}
+
+message RoleSpec {
+    // 角色的权限列表
+    // @gotags: json:"name" bson:"name"
+    string name = 2;
+    // 角色的权限列表
+    // @gotags: json:"description" bson:"description"
+    string description = 3;
+    // 角色的权限列表
+    // @gotags: json:"permissons" bson:"permissons"
+    repeated Permission permissons = 4;
+}
+
+message Role {
+    // 元数据信息
+    // @gotags: json:"meta" bson:",inline"
+    infraboard.mcube.resource.Meta meta = 1;
+    // 角色定义
+    // @gotags: json:"spec" bson:",inline"
+    RoleSpec spec = 2;
+}
+
+message RoleSet {
+    repeated Role items = 1;
+}
+
+
+message QueryRoleRequest {
+    // 哪些Id
+    repeated string role_ids = 1;
+}

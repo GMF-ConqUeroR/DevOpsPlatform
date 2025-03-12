@@ -1,8 +1,9 @@
 package api
 
 import (
-	"auth/apps/token"
 	"fmt"
+
+	"auth/apps/token"
 
 	"github.com/emicklei/go-restful/v3"
 	"github.com/infraboard/mcube/http/response"

@@ -6,8 +6,7 @@ const (
 	AppName = "token"
 )
 
-type Service interface{
+type Service interface {
 	RPCServer
-	RevolkToken(context.Context, *RevolkTokenRequest)(*Token,error)
+	RevolkToken(context.Context, *RevolkTokenRequest) (*Token, error)
 }
-

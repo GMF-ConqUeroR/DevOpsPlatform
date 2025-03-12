@@ -12,6 +12,11 @@ import (
 	"github.com/infraboard/mcube/http/response"
 )
 
+// 中间件构造函数
+func NewAuthFilter() restful.FilterFunction {
+	return NewAuth(rpc.Cli()).Filter
+}
+
 type Auth struct {
 	c *rpc.Client
 }

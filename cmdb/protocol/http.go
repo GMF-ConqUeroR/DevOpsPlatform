@@ -1,6 +1,7 @@
 package protocol
 
 import (
+	authClient "auth/clients/rpc/middlewares/auth"
 	"cmdb/conf"
 	"cmdb/logger"
 	"cmdb/swagger"
@@ -38,6 +39,10 @@ func NewHttp() *Http {
 	// 使用Filter加载 GoRestful中间件
 	r.Filter(cors.Filter)
 
+	// 接入用户中心中间件, 加载全局变量 auth client
+	// 需要提前加载该client, 由于有默认配置:
+	r.Filter(authClient.NewAuthFilter())
+	
 	return &Http{
 		r:          r,
 		apiDocPath: "/apidocs.json",

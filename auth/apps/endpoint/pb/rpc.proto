@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package devops_platform.endpoint;
+option go_package="auth/apps/endpoint";
+
+import "auth/apps/endpoint/pb/model.proto";
+
+service RPC {
+    // 功能注册(全量注册)
+    rpc RegistryEndpoints(EndpointSpecSet) returns(EndpointSet);
+}
