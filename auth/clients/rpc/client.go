@@ -1,6 +1,7 @@
 package rpc
 
 import (
+	"auth/apps/endpoint"
 	"auth/apps/token"
 	"auth/conf"
 	"auth/logger"
@@ -26,4 +27,9 @@ func NewClient(c conf.Grpc) *Client {
 
 func (c *Client) Token() token.RPCClient {
 	return token.NewRPCClient(c.cli)
+}
+
+// endpoint 模块的rpc服务
+func (c *Client) Endpoint() endpoint.RPCClient {
+	return endpoint.NewRPCClient(c.cli)
 }

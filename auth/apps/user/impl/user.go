@@ -1,6 +1,7 @@
 package impl
 
 import (
+	"auth/apps/role"
 	"auth/apps/user"
 	"context"
 
@@ -28,6 +29,18 @@ func (i *impl) DescribeUser(ctx context.Context, in *user.DescribeUserRequest) (
 	err := res.Decode(ins)
 	if err != nil {
 		return nil, err
+	}
+	//通过roleID添加对应的角色到用户
+	if len(ins.Spec.RoleIds) > 0 {
+		inRoleReq := &role.QueryRoleRequest{
+			RoleIds: ins.Spec.RoleIds,
+		}
+		rs, err := i.role.QueryRole(ctx, inRoleReq)
+		if err != nil {
+			return nil, err
+		}
+
+		ins.Roles = rs
 	}
 
 	return ins, nil

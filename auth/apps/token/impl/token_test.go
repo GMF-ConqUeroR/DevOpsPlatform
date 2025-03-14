@@ -8,7 +8,7 @@ import (
 func TestIssueToken(t *testing.T) {
 	in := token.NewIssueTokenRequest()
 	in.Username = "admin"
-	in.Password = "example"
+	in.Password = "123456"
 	token, err := impl.IssueToken(ctx, in)
 	if err != nil {
 		t.Fatal(err)
@@ -17,7 +17,7 @@ func TestIssueToken(t *testing.T) {
 }
 
 func TestDesribeToken(t *testing.T) {
-	in := token.NewDescribeTokenRequest("cutm7u07j4gn7vjids00")
+	in := token.NewDescribeTokenRequest("cva3mi87j4gihvat67o0")
 	ins, err := impl.DesribeToken(ctx, in)
 	if err != nil {
 		t.Fatal(err)
@@ -26,4 +26,13 @@ func TestDesribeToken(t *testing.T) {
 	t.Log(ins.IssueTime())
 	t.Log(ins.AccessTokenExpiredTime())
 	t.Log(ins.IsAcccessTokenExpired())
+}
+
+func TestValidateToken(t *testing.T) {
+	in := token.NewValidateTokenRequest("cva3mi87j4gihvat67o0")
+	resTK, err := impl.ValidateToken(ctx, in)
+	if err != nil {
+		t.Fatal(err)
+	}
+	t.Log(resTK.Roles)
 }

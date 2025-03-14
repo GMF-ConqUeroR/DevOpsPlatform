@@ -4,12 +4,17 @@ package devops_platform.user;
 option go_package="auth/apps/user";
 
 import "mcube/pb/resource/meta.proto";
+import "auth/apps/role/pb/model.proto";
 
 message CreateUserRequest {
     // @gotags: json:"username" bson:"username" validate:"required"
     string username =1;
     // @gotags: json:"password" bson:"password" validate:"required"
     string password =2;
+    // 用户的角色
+    // @gotags: json:"role_ids" bson:"role_ids"
+    repeated string role_ids = 3;
+
 }
 
 message User {
@@ -17,6 +22,9 @@ message User {
     infraboard.mcube.resource.Meta meta = 1;
     // @gotags: json:"spec" bson:",inline"
     CreateUserRequest spec = 2;
+        // 用户管理的角色
+    // @gotags: json:"roles" bson:"roles"
+    role.RoleSet roles = 3;
 }
 
 message DescribeUserRequest {

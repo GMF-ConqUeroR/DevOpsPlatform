@@ -7,8 +7,11 @@ import (
 
 func TestCreateUser(t *testing.T) {
 	in := user.NewCreateUserRequest()
-	in.Username = "test"
-	in.Password = "example"
+	in.Username = "admin"
+	in.Password = "123456"
+	in.RoleIds = []string{
+		"cv8qjbg7j4glapdog05g",
+	}
 	ins, err := impl.CreateUser(ctx, in)
 	if err != nil {
 		t.Fatal(err)
@@ -17,7 +20,7 @@ func TestCreateUser(t *testing.T) {
 }
 
 func TestDescribeUser(t *testing.T) {
-	in := user.NewDescribeUserRequest("test")
+	in := user.NewDescribeUserRequest("admin")
 	ins, err := impl.DescribeUser(ctx, in)
 	if err != nil {
 		t.Fatal(err)

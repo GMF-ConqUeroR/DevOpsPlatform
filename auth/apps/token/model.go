@@ -1,6 +1,8 @@
 package token
 
 import (
+	"auth/logger"
+	"fmt"
 	"time"
 
 	"github.com/rs/xid"
@@ -10,7 +12,7 @@ func NewToken() *Token {
 	return &Token{
 		AccessToken:               xid.New().String(),
 		RefreshToken:              xid.New().String(),
-		AccessTokenExpiredSecond:  10 * 60,
+		AccessTokenExpiredSecond:  60 * 60,
 		RefreshTokenExpiredSecond: 10 * 60 * 4,
 		IssueAt:                   time.Now().Unix(),
 	}
@@ -54,4 +56,23 @@ func (t *Token) IsRefreshTokenExpired() bool {
 
 func (t *Token) RefreshTokenExpiredTime() time.Time {
 	return t.IssueTime().Add(time.Duration(t.RefreshTokenExpiredSecond * int64(time.Second)))
+}
+
+// 判断用户是否有权限访问指定的API
+func (t *Token) HavePermissionOrNot(svc, resource, act string) error {
+	// 通过这种绝不可能条件
+	logger.L().Debug().Msgf("%v,%v,%v", svc, resource, act)
+	if t.Roles == nil && len(t.Roles.Items) > 0 {
+		return nil
+	}
+
+	// 每个角色挨着判断
+	for i := range t.Roles.Items {
+		r := t.Roles.Items[i]
+		if r.HavePermissionOrNot(svc, resource, act) {
+			return nil
+		}
+	}
+
+	return fmt.Errorf(" Permission Denial ")
 }

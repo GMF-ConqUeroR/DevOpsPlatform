@@ -2,7 +2,6 @@ package impl
 
 import (
 	"auth/apps/role"
-	"auth/logger"
 	"context"
 
 	"github.com/infraboard/mcube/pb/resource"
@@ -25,8 +24,6 @@ func (i *impl) QueryRole(ctx context.Context, in *role.QueryRoleRequest) (*role.
 	if len(in.RoleIds) > 0 {
 		filter["_id"] = bson.M{"$in": in.RoleIds}
 	}
-	logger.L().Info().Msgf("%v", filter)
-
 	res, err := i.col.Find(ctx, filter)
 	if err != nil {
 		return nil, err

@@ -1,6 +1,7 @@
 package impl
 
 import (
+	"auth/apps/role"
 	"auth/apps/user"
 	"auth/conf"
 	"auth/logger"
@@ -15,7 +16,8 @@ var _ user.Service = (*impl)(nil)
 type impl struct {
 	user.UnimplementedRPCServer
 	ioc.ObjectImpl
-	col *mongo.Collection
+	col  *mongo.Collection
+	role role.Service
 }
 
 func (i *impl) Init() error {
@@ -24,6 +26,7 @@ func (i *impl) Init() error {
 		panic(err)
 	}
 	i.col = db.Collection("users")
+	i.role = ioc.GetController(role.AppName).(role.Service)
 	return nil
 }
 

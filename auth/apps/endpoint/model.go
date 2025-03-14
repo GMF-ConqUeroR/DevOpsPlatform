@@ -10,7 +10,7 @@ const AppName = "endpoints"
 
 // Role需要应用Endpoint的Id, 要保持ID不变，Endpint的Id不能随机生成
 func (s *EndpointSpec) GenId() string {
-	return fmt.Sprintf("%s.%s", s.Service, s.Action)
+	return fmt.Sprintf("%s.%s", s.Service, s.Path)
 }
 
 func NewEndpoint(spec *EndpointSpec) *Endpoint {
@@ -44,10 +44,10 @@ func (es *EndpointSet) ToMongoDoc() (docs []interface{}) {
 	return
 }
 
-func NewEndpointSpec(svc, act string) *EndpointSpec {
+func NewEndpointSpec(svc, path string) *EndpointSpec {
 	return &EndpointSpec{
 		Service: svc,
-		Action:  act,
+		Path:    path,
 	}
 }
 
@@ -59,4 +59,13 @@ func NewEndpointSpecSet() *EndpointSpecSet {
 
 func (es *EndpointSpecSet) Add(items ...*EndpointSpec) {
 	es.Items = append(es.Items, items...)
+}
+
+func GetValueFromMeta(meta map[string]interface{}, key string) string {
+	v := meta[key]
+	if v == nil {
+		return ""
+	}
+
+	return v.(string)
 }

@@ -3,6 +3,8 @@ syntax = "proto3";
 package devops_platform.token;
 option go_package="auth/apps/token";
 
+import "auth/apps/role/pb/model.proto";
+
 message Token {
     // 访问令牌
     // @gotags: json:"access_token" bson:"access_token"
@@ -22,6 +24,9 @@ message Token {
     // 颁发的用户
     // @gotags: json:"username" bson:"username"
     string username = 5;
+    // 角色
+    // @gotags: json:"roles" bson:"roles"
+    role.RoleSet roles = 7;
 }
 
 message IssueTokenRequest {

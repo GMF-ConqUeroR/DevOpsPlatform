@@ -24,7 +24,11 @@ func (h *Handler) Registry(r *restful.WebService) {
 	// api doc中的分类标签
 	tags := []string{"凭证管理"}
 	// 怎么控制哪些接口认证，哪些接口不认证
-	r.Route(r.GET("/").To(h.QuerySecret).Doc("查询凭证列表").Metadata(restfulspec.KeyOpenAPITags, tags).Metadata("auth", true))
+	r.Route(r.GET("/").To(h.QuerySecret).Doc("查询凭证列表").Metadata(restfulspec.KeyOpenAPITags, tags).
+		Metadata("auth", true).
+		Metadata("permission", true).
+		Metadata("resource", "Secret").
+		Metadata("action", "list"))
 }
 
 func init() {

@@ -2,6 +2,7 @@ package protocol
 
 import (
 	authClient "auth/clients/rpc/middlewares/auth"
+	"auth/clients/rpc/tools"
 	"cmdb/conf"
 	"cmdb/logger"
 	"cmdb/swagger"
@@ -41,8 +42,8 @@ func NewHttp() *Http {
 
 	// 接入用户中心中间件, 加载全局变量 auth client
 	// 需要提前加载该client, 由于有默认配置:
-	r.Filter(authClient.NewAuthFilter())
-	
+	r.Filter(authClient.NewAuthFilter("cmdb"))
+
 	return &Http{
 		r:          r,
 		apiDocPath: "/apidocs.json",
@@ -78,6 +79,13 @@ func (h *Http) Start() error {
 
 	h.r.Add(apidoc.APIDocs(h.apiDocPath, swagger.Docs))
 	logger.L().Debug().Msgf("Swagger API Doc访问地址: http://%s%s", conf.C().Http.Address(), h.apiDocPath)
+
+	// 所有的路由都已经加载好了, 获取当前DefaultContainer 里面注册的所有的WebService(一个service 就是一个模块)
+	r := tools.NewEndpointRegister("cmdb")
+	err := r.Registry(context.Background(), h.r)
+	if err != nil {
+		logger.L().Error().Msgf("registry endpoint error, %s", err)
+	}
 
 	return h.server.ListenAndServe()
 }

@@ -4,6 +4,7 @@ import (
 	"auth/apps/token"
 	"auth/apps/user"
 	"context"
+	"fmt"
 
 	"github.com/infraboard/mcube/exception"
 	"go.mongodb.org/mongo-driver/bson"
@@ -58,5 +59,13 @@ func (i *impl) ValidateToken(ctx context.Context, in *token.ValidateTokenRequest
 	if tk.IsAcccessTokenExpired() {
 		return nil, exception.NewUnauthorized("令牌已经过期, 请重新登录或者刷新")
 	}
+
+	// 补充用户角色
+	u, err := i.user.DescribeUser(ctx, user.NewDescribeUserRequest(tk.Username))
+	if err != nil {
+		return nil, err
+	}
+	tk.Roles = u.Roles
+	fmt.Printf("=====token roles:%v", tk)
 	return tk, nil
 }

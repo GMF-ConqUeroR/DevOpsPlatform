@@ -10,7 +10,7 @@ func TestCreateRole(t *testing.T) {
 		Name:        "admin",
 		Description: "admin test",
 		Permissons: []*role.Permission{
-			{Service: "cmdb", Resource: "Secret", Action: []string{"list"}},
+			{Service: "cmdb", Resource: "secret", Action: []string{"list"}},
 		},
 	}
 

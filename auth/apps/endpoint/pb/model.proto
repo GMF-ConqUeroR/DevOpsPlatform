@@ -9,9 +9,15 @@ message EndpointSpec {
     // 服务名称
     // @gotags: json:"service" bson:"service"
     string service = 1;
-    // 功能名称
+    // 服务资源名称
+    // @gotags: json:"resoruce" bson:"resoruce"
+    string resoruce = 4;
+    // 服务资源的操作
     // @gotags: json:"action" bson:"action"
-    string action = 2;
+    string action = 5;
+    // 功能的路劲: post.url
+    // @gotags: json:"path" bson:"path"
+    string path = 2;
     // 功能描述
     // @gotags: json:"descrption" bson:"descrption"
     string descrption = 3;
